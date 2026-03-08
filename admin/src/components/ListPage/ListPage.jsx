@@ -1,4 +1,4 @@
-import {react,useState,useMemo,useEffect} from 'react';
+import React, { useState, useMemo, useEffect } from "react";
 import { doctorListStyles } from "../../dummyStyles";
 import{Users,XCircle,EyeClosed ,Calendar,Plus,Trash2,CheckCircle,Search,Star,BadgeIndianRupee} from 'lucide-react';
 
@@ -75,7 +75,7 @@ function getSortedScheduleDates(scheduleLike) {
 
 
 const ListPage = ()=> {
-  const API_BASE = "http://localhost:4000";
+const API_BASE = "https://healthorbit-backend.onrender.com";
     const [doctors, setDoctors] = useState([]);
   const [expanded, setExpanded] = useState(null);
   const [query, setQuery] = useState("");
