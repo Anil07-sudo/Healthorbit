@@ -11,11 +11,12 @@ function normalizeService(doc) {
   const name = doc.name || doc.title || doc.serviceName || "Untitled Service";
   const price =
     Number(doc.price ?? doc.fee ?? doc.fees ?? doc.cost ?? doc.amount) || 0;
-  const image =
-    doc.imageUrl ||
-    doc.image ||
-    doc.avatar ||
-    `https://i.pravatar.cc/150?u=${id}`;
+ const image =
+  doc.imageUrl
+    ? `${API_BASE}/${doc.imageUrl}`
+    : doc.image
+    ? `${API_BASE}/${doc.image}`
+    : "https://via.placeholder.com/150";
   // various possible stat shapes
   const totalAppointments =
     doc.totalAppointments ??
@@ -49,7 +50,7 @@ function normalizeService(doc) {
   };
 }
 
-const API_BASE = "http://localhost:4000";
+const API_BASE = "https://healthorbit-backend.onrender.com";
 
 const ServiceDashboard =({ services: servicesProp = null }) =>{
   const [services, setServices] = useState(
@@ -293,7 +294,7 @@ const ServiceDashboard =({ services: servicesProp = null }) =>{
    <StatCard
     icon={<BadgeIndianRupee size={18} />}
     label="Total Earnings"
-    value={formatCurrency(totals.totalsEarning)|| 0}
+  value={formatCurrency(totals.totalEarning) || 0}
 
   />
    <StatCard
