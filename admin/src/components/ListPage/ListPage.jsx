@@ -301,7 +301,11 @@ return (
   <article key={id} className={doctorListStyles.article}>
     <div className={doctorListStyles.articleContent}>
       <img
-        src={doc.imageUrl || doc.image || ""}
+       src={
+  doc.imageUrl ||
+  doc.image ||
+  `https://i.pravatar.cc/150?u=${id}`
+}
         alt={doc.name}
         className={doctorListStyles.doctorImage}
       />
@@ -459,7 +463,7 @@ return (
     >
   {showAll
   ? "Show Less"
-  : `Show more (${filtered.length - 4})`}
+  : `Show more (${filtered.length - 6})`}
     </button>
   </div>
 )}
