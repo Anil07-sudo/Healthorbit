@@ -23,7 +23,7 @@ const ServiceCard = ({ service }) => {
     !!service.imageSrcSet ||
     (!!service.imageSmall && !!service.imageMedium && !!service.imageLarge);
 
-  const src = service.imageUrl || service.image || service.imageSmall || "";
+const src = service.image || service.imageUrl || service.imageSmall || PlaceholderImg;
   const srcSet =
     service.imageSrcSet ||
     (service.imageSmall || service.image
@@ -144,7 +144,7 @@ const ServiceDetailPage =()=> {
       const items = (json && (json.data || json)) || [];
       const normalized = (Array.isArray(items) ? items : []).map((s) => {
         const id = s._id || s.id;
-        const image = s.imageUrl || s.image || s.imageSmall || "";
+const image = s.imageUrl || s.image || s.imageSmall || PlaceholderImg;
         const available =
           typeof s.available === "boolean"
             ? s.available

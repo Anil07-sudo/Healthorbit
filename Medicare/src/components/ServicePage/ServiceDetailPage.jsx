@@ -216,8 +216,15 @@ const local = servicesData.find((s) => String(s.id) === String(id));
       doc.slug ??
       String(doc.name).replace(/\s+/g, "-").toLowerCase();
     out.name = doc.name ?? doc.title ?? "Service";
-    out.image =
-      doc.image || doc.imageUrl || doc.imageURL || doc.image_path || null;
+   // around line 212
+const rawImage =
+  doc.image || doc.imageUrl || doc.imageURL || doc.image_path || "";
+
+out.image = rawImage
+  ? rawImage.startsWith("http")
+    ? rawImage
+    : `${DEFAULT_HOST}/${rawImage}`
+  : null;
     out.price =
       typeof doc.price === "number" ? doc.price : Number(doc.price) || 0;
     out.about = doc.about ?? doc.description ?? doc.shortDescription ?? "";
