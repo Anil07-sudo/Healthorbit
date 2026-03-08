@@ -119,7 +119,7 @@ const ServiceCard = ({ service }) => {
 };
 const ServiceDetailPage =()=> {
   
-  const API_BASE = "http://localhost:4000";
+  const API_BASE = "https://healthorbit-backend.onrender.com";
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
