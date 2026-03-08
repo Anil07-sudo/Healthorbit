@@ -13,8 +13,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@clerk/clerk-react";
 import toast, { Toaster } from "react-hot-toast";
 import { serviceDetailStyles, iconSize,serviceCardStyles } from "../../dummyStyles";
-
-const DEFAULT_HOST = "https://healthorbit-backend.onrender.com".replace(/\/$/, "");
+const DEFAULT_HOST = import.meta.env.VITE_API_URL.replace(/\/$/, "");
 
 const servicesData = [];
 export default function ServiceDetail() {
