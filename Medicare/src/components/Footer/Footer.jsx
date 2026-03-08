@@ -79,10 +79,10 @@ return(
           </div>
            <div>
               <h2 className={footerStyles.companyName}>
-                MediCare
+                HealthOrbit
               </h2>
               <p className={footerStyles.companyTagline}>
-                Healthcare Solutions
+              Hospital Network
               </p>
             </div>
           
