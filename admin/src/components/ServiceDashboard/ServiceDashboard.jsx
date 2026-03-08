@@ -4,20 +4,20 @@ import{User,XCircle,EyeClosed ,Calendar,Plus,Trash2,CheckCircle,Search, Clipboar
 
 
 // normalize the backend data that is coming from the DB
-
 function normalizeService(doc) {
   if (!doc) return null;
+
   const id = doc._id || doc.id || String(Math.random()).slice(2);
   const name = doc.name || doc.title || doc.serviceName || "Untitled Service";
+
   const price =
     Number(doc.price ?? doc.fee ?? doc.fees ?? doc.cost ?? doc.amount) || 0;
- const image =
-  doc.imageUrl
-    ? `${API_BASE}/${doc.imageUrl}`
-    : doc.image
-    ? `${API_BASE}/${doc.image}`
-    : "https://via.placeholder.com/150";
-  // various possible stat shapes
+
+  const image =
+    doc.imageUrl ||
+    doc.image ||
+    "https://via.placeholder.com/150";
+
   const totalAppointments =
     doc.totalAppointments ??
     doc.appointments?.total ??
@@ -25,12 +25,14 @@ function normalizeService(doc) {
     doc.stats?.total ??
     doc.bookings ??
     0;
+
   const completed =
     doc.completed ??
     doc.appointments?.completed ??
     doc.stats?.completed ??
     doc.completedAppointments ??
     0;
+
   const canceled =
     doc.canceled ??
     doc.appointments?.canceled ??
@@ -49,7 +51,6 @@ function normalizeService(doc) {
     raw: doc,
   };
 }
-
 const API_BASE = "https://healthorbit-backend.onrender.com";
 
 const ServiceDashboard =({ services: servicesProp = null }) =>{
