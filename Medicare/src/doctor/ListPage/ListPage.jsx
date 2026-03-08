@@ -457,11 +457,17 @@ function RescheduleButton({ appointment, onReschedule }) {
 
   const filtered = useMemo(() => {
     return [...appointments]
-      .filter((a) =>
-        search
-          ? (a.patient || "").toLowerCase().includes(search.toLowerCase())
-          : true,
-      )
+ .filter((a) => {
+  if (!search) return true;
+
+  const q = search.toLowerCase();
+
+  return (
+    (a.patient || "").toLowerCase().includes(q) ||
+    (a.doctorName || "").toLowerCase().includes(q) ||
+    (a.mobile || "").includes(q)
+  );
+})
       .filter((a) => (statusFilter ? a.status === statusFilter : true))
       .sort(
         (a, b) => parseDateTime(b.date, b.time) - parseDateTime(a.date, a.time),
