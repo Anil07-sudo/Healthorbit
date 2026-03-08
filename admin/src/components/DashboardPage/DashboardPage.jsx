@@ -4,7 +4,7 @@ import { dashboardStyles as s } from  "../../dummyStyles";
 import { Users,UserRoundCheck, CalendarRange ,BadgeIndianRupee,CheckCircle,XCircle,Search} from "lucide-react";
 
 const API_BASE = "https://healthorbit-backend.onrender.com";
-const PATIENT_COUNT_API = `${API_BASE}/api/appointments/paitents/count`;
+const PATIENT_COUNT_API = `${API_BASE}/api/appointments/patients/count`;
 
 
 
