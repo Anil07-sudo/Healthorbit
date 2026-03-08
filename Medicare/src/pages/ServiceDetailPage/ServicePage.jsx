@@ -36,57 +36,18 @@ const src = service.image || service.imageUrl || service.imageSmall || Placehold
   const shortDescription = service.shortDescription || service.about || "";
 
   return (
-    <div className={serviceCardStyles.card}>
-      <div className={serviceCardStyles.imageContainer} aria-hidden="true">
-        {hasSrcSet ? (
-          <picture className={serviceCardStyles.picture}>
-            {service.imageWebp && (
-              <source srcSet={service.imageWebp} type="image/webp" />
-            )}
-            {service.imageSrcSet ? (
-              <img
-                src={src || PlaceholderImg}
-                srcSet={service.imageSrcSet}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                alt={name}
-                loading="lazy"
-                decoding="async"
-                className={serviceCardStyles.responsiveImage}
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src = PlaceholderImg;
-                }}
-              />
-            ) : (
-              <img
-                src={src || PlaceholderImg}
-                srcSet={srcSet || undefined}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                alt={name}
-                loading="lazy"
-                decoding="async"
-                className={serviceCardStyles.responsiveImage}
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src = PlaceholderImg;
-                }}
-              />
-            )}
-          </picture>
-        ) : (
-          <img
-            src={src || PlaceholderImg}
-            alt={name}
-            loading="lazy"
-            decoding="async"
-            className={serviceCardStyles.fallbackImage}
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = PlaceholderImg;
-            }}
-          />
-        )}
-      </div>
+   <div className={serviceCardStyles.card}>
+  <div className={serviceCardStyles.imageContainer}>
+    <img
+      src={service.image || service.imageUrl || PlaceholderImg}
+      alt={name}
+      loading="lazy"
+      className={serviceCardStyles.fallbackImage}
+      onError={(e) => {
+        e.currentTarget.src = PlaceholderImg;
+      }}
+    />
+  </div>
 
       <div className={serviceCardStyles.content}>
         <h3 className={serviceCardStyles.serviceName}>{name}</h3>
