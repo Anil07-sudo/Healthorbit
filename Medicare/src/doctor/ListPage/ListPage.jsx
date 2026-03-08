@@ -1,6 +1,5 @@
 
-
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import {listPageStyles} from '../../dummyStyles'
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 import{Calendar, Search, X,Phone} from 'lucide-react'
@@ -12,7 +11,9 @@ const ListPage=()=> {
 
   
 function parseDateTime(date, time) {
-  return new Date(`${date}T${time}:00`);
+  if (!date) return new Date(0);
+  const safeTime = time || "00:00";
+  return new Date(`${date}T${safeTime}:00`);
 }
 
 function formatTimeAMPM(time24) {
@@ -349,8 +350,8 @@ function RescheduleButton({ appointment, onReschedule }) {
   }
 
   useEffect(() => {
-    fetchAppointments();
-  }, []);
+  fetchAppointments();
+}, [doctorId]);
 
   async function updateStatusRemote(id, newStatus) {
     const appt = appointments.find((p) => p.id === id);
