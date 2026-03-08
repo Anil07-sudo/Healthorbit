@@ -228,7 +228,7 @@ return(
 
   <div className={footerStyles.copyright}>
     <span>
-      &copy; {currentYear} MediCare Healthcare. All rights reserved.
+      &copy; {currentYear} HealthOrbit. All rights reserved.
     </span>
   </div>
 
