@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom'; // Added missing Link import
-import { Search, X, Medal, ChevronRight } from 'lucide-react'; // Added missing Medal and ChevronRight
+import { Search, X, Medal, ChevronRight,CircleChevronDown } from 'lucide-react'; // Added missing Medal and ChevronRight
 import { doctorsPageStyles } from '../../dummyStyles';
 
 const DoctorsPage = () => {
