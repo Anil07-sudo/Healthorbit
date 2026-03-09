@@ -1,7 +1,7 @@
 
 import {useCallback, useEffect,useState,useRef} from 'react'
 import { doctorDetailStyles as s } from "../../dummyStyles";
-import{User,XCircle,EyeClosed ,Calendar,Plus,Trash2,CheckCircle} from 'lucide-react';
+import{User,XCircle,EyeClosed,Eye,Calendar,Plus,Trash2,CheckCircle} from 'lucide-react';
 
 // helper function 
 function timeStringToMinutes(t) {
