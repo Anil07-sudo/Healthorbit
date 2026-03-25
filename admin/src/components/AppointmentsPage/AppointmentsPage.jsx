@@ -25,18 +25,36 @@ function formatDateISO(iso) {
   }
 }
 
+// function dateTimeFromSlot(slot) {
+//   try {
+//     const [y, m, d] = slot.date.split("-");
+//     const base = new Date(Number(y), Number(m) - 1, Number(d), 0, 0, 0, 0);
+//     const [time, ampm] = slot.time.split(" ");
+//     let [hh, mm] = time.split(":").map(Number);
+//     if (ampm === "PM" && hh !== 12) hh += 12;
+//     if (ampm === "AM" && hh === 12) hh = 0;
+//     base.setHours(hh, mm, 0, 0);
+//     return base;
+//   } catch {
+//     return new Date(slot.date + "T00:00:00");
+//   }
+// }
+
+
 function dateTimeFromSlot(slot) {
   try {
     const [y, m, d] = slot.date.split("-");
     const base = new Date(Number(y), Number(m) - 1, Number(d), 0, 0, 0, 0);
-    const [time, ampm] = slot.time.split(" ");
+    if (!slot.time) return base;
+    const parts = slot.time.split(" ");
+    const [time, ampm] = parts;
     let [hh, mm] = time.split(":").map(Number);
     if (ampm === "PM" && hh !== 12) hh += 12;
     if (ampm === "AM" && hh === 12) hh = 0;
     base.setHours(hh, mm, 0, 0);
-    return base;
+    return isNaN(base.getTime()) ? new Date(0) : base;
   } catch {
-    return new Date(slot.date + "T00:00:00");
+    return new Date(0);
   }
 }
 
@@ -109,32 +127,66 @@ useEffect(() => {
     return ["all", ...Array.from(set)];
   }, [appointments]);
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return appointments.filter((a) => {
-      if (
-        filterSpeciality !== "all" &&
-        (a.speciality || "").toLowerCase() !== filterSpeciality.toLowerCase()
-      )
-        return false;
-      if (filterDate && a.slot?.date !== filterDate) return false;
-      if (!q) return true;
-      return (
-        (a.doctorName || "").toLowerCase().includes(q) ||
-        (a.speciality || "").toLowerCase().includes(q) ||
-        (a.patientName || "").toLowerCase().includes(q) ||
-        (a.mobile || "").toLowerCase().includes(q)
-      );
-    });
-  }, [appointments, query, filterDate, filterSpeciality]);
+  // const filtered = useMemo(() => {
+  //   const q = query.trim().toLowerCase();
+  //   return appointments.filter((a) => {
+  //     if (
+  //       filterSpeciality !== "all" &&
+  //       (a.speciality || "").toLowerCase() !== filterSpeciality.toLowerCase()
+  //     )
+  //       return false;
+  //     if (filterDate && a.slot?.date !== filterDate) return false;
+  //     if (!q) return true;
+  //     return (
+  //       (a.doctorName || "").toLowerCase().includes(q) ||
+  //       (a.speciality || "").toLowerCase().includes(q) ||
+  //       (a.patientName || "").toLowerCase().includes(q) ||
+  //       (a.mobile || "").toLowerCase().includes(q)
+  //     );
+  //   });
+  // }, [appointments, query, filterDate, filterSpeciality]);
+const filtered = useMemo(() => {
+  const q = query.trim().toLowerCase();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  return appointments.filter((a) => {
+    const apptDate = dateTimeFromSlot(a.slot);
+    if (apptDate < today) return false;
+
+    if (
+      filterSpeciality !== "all" &&
+      (a.speciality || "").toLowerCase() !== filterSpeciality.toLowerCase()
+    ) return false;
+
+    if (filterDate && a.slot?.date !== filterDate) return false;
+    if (!q) return true;
+
+    return (
+      (a.doctorName || "").toLowerCase().includes(q) ||
+      (a.speciality || "").toLowerCase().includes(q) ||
+      (a.patientName || "").toLowerCase().includes(q) ||
+      (a.mobile || "").toLowerCase().includes(q)
+    );
+  });
+}, [appointments, query, filterDate, filterSpeciality]);
+
+
+  // const sortedFiltered = useMemo(() => {
+  //   return filtered.slice().sort((a, b) => {
+  //     const da = dateTimeFromSlot(a.slot).getTime();
+  //     const db = dateTimeFromSlot(b.slot).getTime();
+  //     return db - da;
+  //   });
+  // }, [filtered]);
 
   const sortedFiltered = useMemo(() => {
-    return filtered.slice().sort((a, b) => {
-      const da = dateTimeFromSlot(a.slot).getTime();
-      const db = dateTimeFromSlot(b.slot).getTime();
-      return db - da;
-    });
-  }, [filtered]);
+  return filtered.slice().sort((a, b) => {
+    const da = dateTimeFromSlot(a.slot).getTime();
+    const db = dateTimeFromSlot(b.slot).getTime();
+    return da - db;
+  });
+}, [filtered]);
 
   const displayed = useMemo(
     () => (showAll ? sortedFiltered : sortedFiltered.slice(0, 8)),
