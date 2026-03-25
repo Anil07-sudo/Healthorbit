@@ -285,9 +285,10 @@ const [showAll, setShowAll] = useState(false);
         className={s.searchInput}
         placeholder="Search name / Specialization / Fee"
       />
+      <Search className={s.searchIcon}/>
     </div>
 
-<Search className={s.searchIcon}/>
+
 <button
   onClick={() => {
     setQuery("");

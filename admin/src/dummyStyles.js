@@ -81,12 +81,9 @@ export const pageStyles = {
   headerSubtitle: "text-xs sm:text-sm text-emerald-600",
   headerControlsSection: "w-full sm:w-auto",
   
-  // searchContainer: "flex items-center bg-white rounded-full px-3 py-2 shadow-sm w-full sm:w-72",
-  // searchIcon: "text-emerald-400",
-  // searchInput: "ml-3 w-full outline-none text-emerald-700 placeholder-emerald-400 bg-transparent text-sm",
-  searchContainer: "relative flex items-center bg-white rounded-full px-3 py-2 shadow-sm w-full sm:w-72",
-searchIcon: "absolute right-3 text-emerald-400",
-searchInput: "w-full pr-10 outline-none text-emerald-700 placeholder-emerald-400 bg-transparent text-sm",
+  searchContainer: "flex items-center bg-white rounded-full px-3 py-2 shadow-sm w-full sm:w-72",
+  searchIcon: "text-emerald-400",
+  searchInput: "ml-3 w-full outline-none text-emerald-700 placeholder-emerald-400 bg-transparent text-sm",
   
   filterContainer: "flex items-center flex-col md:flex-row lg:flex-row gap-2 w-full sm:w-auto",
   dateFilter: "bg-white rounded-full px-3 py-2 shadow-sm flex items-center gap-2 w-full sm:w-auto",
