@@ -3,7 +3,7 @@ import React, { useCallback, useState,useEffect,useMemo } from 'react';
 import { appointmentPageStyles,cardStyles,badgeStyles,iconSize, } from '../../dummyStyles';
 import { useAuth, useUser } from '@clerk/clerk-react';
 import { Toaster } from "react-hot-toast";
-import { CalendarDays, Clock, Wallet,CreditCard ,CheckCircle} from "lucide-react";
+import { CalendarDays, Clock, Wallet,CreditCard ,CheckCircle, Bell} from "lucide-react";
 
 const API_BASE = "https://healthorbit-backend.onrender.com";
 const API = axios.create({
