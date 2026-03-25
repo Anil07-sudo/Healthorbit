@@ -85,7 +85,8 @@ useEffect(() => {
           throw new Error(body?.message || `Failed to fetch (${res.status})`);
         }
         const data = await res.json();
-        const items = (data?.appointments || []).map((a) => {
+        console.log("API response:", data); 
+        const items = (data?.Appointments || []).map((a) => {
           const doctorName =
             (a.doctorId && a.doctorId.name) || a.doctorName || "";
           const speciality =
@@ -272,7 +273,9 @@ const filtered = useMemo(() => {
             status: a.status || (a.payment && a.payment.status) || "Pending",
             raw: a,
           }));
+          // setAppointments(items);
           setAppointments(items);
+console.log(items.map(a => ({ name: a.patientName, date: a.slot.date, time: a.slot.time }))) // ← add this line
         }
       } catch (e) {
       }
