@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef,useMemo} from 'react';
 import { serviceAppointmentsStyles } from '../../dummyStyles';
 import ListServicePage from '../ListServicePage/ListServicePage';
-import{User,XCircle, XIcon,EyeClosed ,Calendar,Plus,Trash2,CheckCircle,SearchIcon,AlertTriangle,Image,Clock,Loader2} from 'lucide-react';
+import{User,XCircle, XIcon,EyeClosed ,Calendar,Plus,Trash2,CheckCircle,SearchIcon,AlertTriangle,Image,Clock,Loader2,Phone,BadgeIndianRupee} from 'lucide-react';
 
 
 // helper function
